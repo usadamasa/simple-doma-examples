@@ -156,7 +156,7 @@ public class EmployeeRepository {
             d,
             (employee, department) -> {
               employee.setDepartment(department);
-              department.getEmployees().add(employee);
+              department.employees().add(employee);
             })
         .fetch();
   }
@@ -212,7 +212,7 @@ public class EmployeeRepository {
             d,
             e,
             (department, employee) -> {
-              department.getEmployees().add(employee);
+              department.employees().add(employee);
               employee.setDepartment(department);
             })
         .fetch();

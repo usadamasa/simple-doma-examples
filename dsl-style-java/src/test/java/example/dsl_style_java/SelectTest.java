@@ -180,8 +180,8 @@ public class SelectTest {
     List<Employee> list = repository.selectAllWithAssociation();
     assertEquals(14, list.size());
     for (Employee e : list) {
-      assertNotNull(e.getDepartment().getName());
-      assertTrue(e.getDepartment().getEmployees().contains(e));
+      assertNotNull(e.getDepartment().name());
+      assertTrue(e.getDepartment().employees().contains(e));
     }
   }
 
