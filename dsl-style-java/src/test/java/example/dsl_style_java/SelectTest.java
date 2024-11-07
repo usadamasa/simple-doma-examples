@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import example.dsl_style_java.domain.Age;
 import example.dsl_style_java.domain.Salary;
+import example.dsl_style_java.entity.Department;
 import example.dsl_style_java.entity.Employee;
 import example.dsl_style_java.entity.NameAndSalaryDto;
 import example.dsl_style_java.repository.EmployeeRepository;
@@ -182,6 +183,12 @@ public class SelectTest {
       assertNotNull(e.getDepartment().getName());
       assertTrue(e.getDepartment().getEmployees().contains(e));
     }
+  }
+
+  @Test
+  public void testDepartmentAssoc() {
+    List<Department> depts = repository.selectAllDeptWithEmployees();
+    assertEquals(3, depts.size());
   }
 
   @Test

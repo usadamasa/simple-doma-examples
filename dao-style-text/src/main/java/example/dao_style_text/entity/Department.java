@@ -1,9 +1,6 @@
 package example.dao_style_text.entity;
 
-import org.seasar.doma.Entity;
-import org.seasar.doma.Id;
-import org.seasar.doma.Metamodel;
-import org.seasar.doma.Version;
+import org.seasar.doma.*;
 
 @Entity(metamodel = @Metamodel)
 public class Department {
@@ -12,6 +9,8 @@ public class Department {
   String name;
 
   @Version Integer version;
+
+  @Transient Employee employees;
 
   public Integer getId() {
     return id;

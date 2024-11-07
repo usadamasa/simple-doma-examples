@@ -2,10 +2,7 @@ package example.dsl_style_java.repository;
 
 import example.dsl_style_java.domain.Age;
 import example.dsl_style_java.domain.Salary;
-import example.dsl_style_java.entity.Department_;
-import example.dsl_style_java.entity.Employee;
-import example.dsl_style_java.entity.Employee_;
-import example.dsl_style_java.entity.NameAndSalaryDto;
+import example.dsl_style_java.entity.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -201,6 +198,23 @@ public class EmployeeRepository {
         .from(e)
         .innerJoin(d, on -> on.eq(e.departmentId, d.id))
         .where(c -> c.eq(d.name, departmentName))
+        .fetch();
+  }
+
+  public List<Department> selectAllDeptWithEmployees() {
+    Department_ d = new Department_();
+    Employee_ e = new Employee_();
+    return queryDsl
+        .from(d)
+        .innerJoin(e, on -> on.eq(d.id, e.departmentId))
+        .orderBy(c -> c.asc(d.id))
+        .associate(
+            d,
+            e,
+            (department, employee) -> {
+              department.getEmployees().add(employee);
+              employee.setDepartment(department);
+            })
         .fetch();
   }
 
